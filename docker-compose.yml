@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  url-shortner-backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    container_name: "url-shortner-backend"
+    ports:
+      - "3100:3100"
+    restart: always
+
+  url-shortner-frontend:
+    depends_on:
+      - url-shortner-backend
+    container_name: "url-shortner-frontend"
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    restart: always
